@@ -1,0 +1,23 @@
+name: macOS CI
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macos-13
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print macOS version
+        run: sw_vers
+
+      # Example: Build/test your project (customize this step)
+      - name: Build project
+        run: |
+          make

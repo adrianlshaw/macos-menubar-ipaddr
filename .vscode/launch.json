@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch WiFiStatusBar",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/.build/release/WiFiStatusBar",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:macos-menubar-ipaddr}",
+            "name": "Debug WiFiStatusBar",
+            "program": "${workspaceFolder:macos-menubar-ipaddr}/.build/debug/WiFiStatusBar",
+            "preLaunchTask": "swift: Build Debug WiFiStatusBar"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:macos-menubar-ipaddr}",
+            "name": "Release WiFiStatusBar",
+            "program": "${workspaceFolder:macos-menubar-ipaddr}/.build/release/WiFiStatusBar",
+            "preLaunchTask": "swift: Build Release WiFiStatusBar"
+        }
+    ]
+} 
