@@ -14,15 +14,6 @@ struct ContentView: View {
             
             Divider()
             
-            // Copy IP Menu Item
-            Button(action: copyIPToClipboard) {
-                Text("Copy IP")
-                Text("⌘C").foregroundColor(.secondary)
-            }
-            .keyboardShortcut("c")
-            
-            Divider()
-            
             // Refresh Menu Item
             Button(action: ipManager.fetchIP) {
                 Text("Refresh")
