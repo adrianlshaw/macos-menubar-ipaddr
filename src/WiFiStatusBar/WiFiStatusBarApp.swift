@@ -4,11 +4,15 @@ import SwiftUI
 @main
 struct WiFiStatusBarApp: App {
     @StateObject private var ipManager = IPManager()
-    @State private var isMenuOpen = false
+    @State private var showCopiedMessage = false
     
     @available(macOS 13.0, *)
     var body: some Scene {
         MenuBarExtra {
+            Button("Copy IP") {
+                copyToClipboard()
+            }
+            .keyboardShortcut("c")
             
             Button("Refresh") {
                 ipManager.fetchIP()
@@ -22,11 +26,23 @@ struct WiFiStatusBarApp: App {
             }
             .keyboardShortcut("q")
         } label: {
-            Text(ipManager.currentIP)
-                .font(.system(size: 13, design: .monospaced))
-                .onReceive(NotificationCenter.default.publisher(for: NSMenu.didBeginTrackingNotification)) { _ in
-                    copyToClipboard()
+            Group {
+                if showCopiedMessage {
+                    Text("Copied!")
+                        .font(.system(size: 13, design: .monospaced))
+                        .foregroundColor(.green)
+                } else {
+                    Text(ipManager.currentIP)
+                        .font(.system(size: 13, design: .monospaced))
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSMenu.didBeginTrackingNotification)) { _ in
+                copyToClipboard()
+                showCopiedMessage = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    showCopiedMessage = false
+                }
+            }
         }
         .menuBarExtraStyle(.menu)
     }
