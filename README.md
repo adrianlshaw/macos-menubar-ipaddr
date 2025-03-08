@@ -2,6 +2,8 @@
 
 Menu bar app for macOS that shows public IP address.
 
+[Screenshot](.github/screenshot.png)
+
 Build using `make`
 
 Resulting app binary is in `.build/release/WiFiStatusBar`
